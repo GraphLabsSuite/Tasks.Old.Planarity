@@ -42,15 +42,37 @@ namespace GraphLabs.Tasks.Template
                 Description = "Перемещение вершин"
             };
 
-            // Перемещение вершин
-            var dontTouch = new ToolBarInstantCommand(
-                () => UserActionsManager.RegisterMistake("Сказали же НЕ ТРОГАТЬ!!!", 1),
-                () => _state == State.Nothing
-                )
-            {
-                Image = new BitmapImage(GetImageUri("DontTouch.png")),
-                Description = "НЕ ТРОГАТЬ"
-            };
+            //удаление вершин
+            var removeVertex = new ToolBarToggleCommand(
+                () =>
+                {
+                    UserActionsManager.RegisterInfo("Нажмите на вершину для удаления (все ее связи удалятся тоже)");
+                    _state = State.RemoveVertex;
+                },
+                () => _state = State.Nothing,
+                () => _state == State.Nothing,
+                () => _state == State.RemoveVertex
+                );
+            removeVertex.Image = new BitmapImage(GetImageUri("DontTouch.png"));
+            removeVertex.Description = "Удаление вершины";
+
+            //Добавление вершинки
+            var testBut = new ToolBarToggleCommand(
+                () =>
+                {
+                    UserActionsManager.RegisterInfo("Нажмите в то место, куда ходите добавить вершину.");
+                    _state = State.AddVertex;
+                },
+                () =>
+                {
+                    _state = State.Nothing;
+                    UserActionsManager.RegisterInfo("Добавление вершины отменено");
+                },
+                () => _state == State.Nothing,
+                () => _state == State.AddVertex
+                );
+            testBut.Image = new BitmapImage(GetImageUri("NewVertex.png"));
+            testBut.Description = "Добавить вершину";
 
             // Завершение работы
             var finishTask = new ToolBarInstantCommand(
@@ -66,8 +88,9 @@ namespace GraphLabs.Tasks.Template
             };
 
             ToolBarCommands.Add(moveCommand);
-            ToolBarCommands.Add(dontTouch);
+            ToolBarCommands.Add(removeVertex);
             ToolBarCommands.Add(finishTask);
+            ToolBarCommands.Add(testBut);
         }
     }
 }
