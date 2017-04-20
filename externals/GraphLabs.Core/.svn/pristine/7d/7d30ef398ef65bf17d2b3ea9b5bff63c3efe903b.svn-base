@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphLabs.Graphs.UIComponents</name>
+    </assembly>
+    <members>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.Edge">
+            <summary> Контрол-ребро </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.Vertex1Property">
+            <summary> Вершина 1 (исток) </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.Vertex2Property">
+            <summary> Вершина 2 (сток) </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.Vertex1Changed(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary> Callback на изменение вершины 1 </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.Vertex2Changed(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary> Callback на изменение вершины 2 </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.IsWeightedProperty">
+            <summary> Ребро взвешенное? </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.WeightProperty">
+            <summary> Вес </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.DirectedProperty">
+            <summary> Ребро ориентированное? </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.DirectedChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary> Callback на изменение свойства направленности </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.X1Property">
+            <summary> Координата X вершины-истока </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.Y1Property">
+            <summary> Координата Y вершины-истока </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.X2Property">
+            <summary> Координата X вершины-стока </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.Y2Property">
+            <summary> Координата Y вершины-стока </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.WeightXProperty">
+            <summary> X-кооридната метки веса </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.WeightYProperty">
+            <summary> Y-кооридната метки веса </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.StrokeProperty">
+            <summary> Цвет </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Edge.StrokeThicknessProperty">
+            <summary> Толщина </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes 
+            (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>. 
+            In simplest terms, this means the method is called just before a UI element displays in an application. 
+            </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.UpdateZIndex">
+            <summary> Обновляет ZIndex ребра таким образом, чтобы оно не рисовалось поверх вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.CalculateArrowCoords">
+            <summary> Считает координаты углов триугольника-стрелки и возвращает результат в виде коллекции </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.UpdateComponentsPosition">
+            <summary> Обновляет положение треугольника-стрелки </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.#ctor">
+            <summary> Конструктор </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.ToString">
+            <summary> Returns a string that represents the current object. </summary>
+            <returns> A string that represents the current object. </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+            <remarks> Не в этот раз, детка </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.GetHashCode">
+            <summary> GetHashCode </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.Equals(GraphLabs.Graphs.IEdge)">
+            <summary> Сравнение рёбер </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Edge.Equals(System.Object)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Vertex1">
+            <summary> Вершина 1 (исток) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.GraphLabs#Graphs#IEdge#Vertex2">
+            <summary> Индекс вершины 2 (вершины-стока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.GraphLabs#Graphs#IEdge#Vertex1">
+            <summary> Индекс вершины 1 (вершины-истока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Vertex2">
+            <summary> Вершина 2 (сток) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.IsWeighted">
+            <summary> Ребро взвешенное? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Weight">
+            <summary> Вес </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Directed">
+            <summary> Ребро ориентированное? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.WeightX">
+            <summary> X-кооридната метки веса </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.WeightY">
+            <summary> Y-кооридната метки веса </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.X1">
+            <summary> Координата X вершины-истока </summary>    
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Y1">
+            <summary> Координата Y вершины-истока </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.X2">
+            <summary> Координата X вершины-стока </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Y2">
+            <summary> Координата Y вершины-стока </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.Stroke">
+            <summary> Цвет </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Edge.StrokeThickness">
+            <summary> Толщина </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer">
+            <summary> Контрол для визуализации графов </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexRadiusProperty">
+            <summary> Радиус вершины по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexBackgroundProperty">
+            <summary> Кисть для фона вершины по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexBorderBrushProperty">
+            <summary> Кисть для фона вершины по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexBorderThicknessProperty">
+            <summary> Радиус вершины по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultEdgeStrokeProperty">
+            <summary> Кисть для ребра по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultEdgeStrokeThicknessProperty">
+            <summary> Толщина ребра по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexStyleProperty">
+            <summary> Темплейт вершины по-умолчанию </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AllowVerticesOverlapProperty">
+            <summary> Позволить наложение вершин </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.GraphProperty">
+            <summary> Отображаемый граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.GraphChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary> Callback на изменение Graph </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.IsAnimationSuspendedProperty">
+            <summary> Анимация приостановлена? </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Refresh">
+            <summary> Полностью обновляет состояние визуализатора, перечитывая отображаемый граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.SetRandomStartLocations">
+            <summary> Устанавливает начальное рандомное положение вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.SetCircleLocations">
+            <summary> Устанавливает начальные положения вершин по окружности </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Distance(GraphLabs.Graphs.UIComponents.Visualization.Vertex,GraphLabs.Graphs.UIComponents.Visualization.Vertex)">
+            <summary> Рассотяние между v1 и v2 </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AreIntersecting(GraphLabs.Graphs.UIComponents.Visualization.Vertex,GraphLabs.Graphs.UIComponents.Visualization.Vertex)">
+            <summary> Оперделяет, пересекаются ли вершины </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.CalculateVertexPositions">
+            <summary> Считает позиции всех вершин, используя модель с зарядами и пружинками </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.IsMouseVerticesMovingEnebledProperty">
+            <summary> Разрешено ли перемещение вершин мышкой? </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.#ctor">
+            <summary> Конструктор </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AddEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.RemoveEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AddEdge(GraphLabs.Graphs.UIComponents.Visualization.Edge)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.RemoveEdge(GraphLabs.Graphs.UIComponents.Visualization.Edge)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AddVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Добавляет вершину vertex в граф </summary>
+            <remarks> Для добавления вершины на конкретную позицию используйте AddVertex(Vertex) </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.RemoveVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AddVertex(GraphLabs.Graphs.UIComponents.Visualization.Vertex)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.RemoveVertex(GraphLabs.Graphs.UIComponents.Visualization.Vertex)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexRadius">
+            <summary> Радиус вершины по-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexBackground">
+            <summary> Кисть для фона вершины по-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexBorderBrush">
+            <summary> Кисть для границы вершины по-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexBorderThickness">
+            <summary> Толщина границы вершиныпо-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultEdgeStroke">
+            <summary> Кисть ребра по-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultEdgeStrokeThickness">
+            <summary> Толщина ребра по-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.DefaultVertexStyle">
+            <summary> Темплейт вершины по-умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AllowVerticesOverlap">
+            <summary> Возможность наложения вершин по умолчанию </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Graph">
+            <summary> Отображаемый граф </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.IsAnimationSuspended">
+            <summary> Анимация приостановлена? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.VisualizationAlgorithm">
+            <summary> Алгоритм, используемый для визуализации </summary>
+        </member>
+        <member name="E:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.VertexClick">
+            <summary> Клик по вершине </summary>
+        </member>
+        <member name="E:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.EdgeClick">
+            <summary> Клик по ребру </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.IsMouseVerticesMovingEnabled">
+            <summary> Разрешено ли перемещение вершин мышкой? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.EdgesCount">
+            <summary> Числов рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.GraphLabs#Graphs#IGraph#Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.GraphLabs#Graphs#IGraph#Item(GraphLabs.Graphs.IVertex,GraphLabs.Graphs.IVertex)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Item(GraphLabs.Graphs.UIComponents.Visualization.Vertex,GraphLabs.Graphs.UIComponents.Visualization.Vertex)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.VerticesCount">
+            <summary> Числов вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.GraphVisualizer.GraphLabs#Graphs#IGraph#Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.Vertex">
+            <summary> Контрол-вершина </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Vertex.RadiusProperty">
+            <summary> Радиус вершины </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.RadiusChanged(System.Windows.DependencyObject,System.Windows.DependencyPropertyChangedEventArgs)">
+            <summary> Callback на изменение радиуса </summary>
+            <remarks> 
+            При изменении радиуса меняет положение вершины таким образом,
+            чтобы её центр остался на прежнем месте.
+            </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.GetDesiredRadius">
+            <summary> Возвращает предпочитаемый радиус вершины </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ScaleFactorProperty">
+            <summary> Коэффициент масштабирования </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Vertex.XProperty">
+            <summary> Координата X центра вершины </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Vertex.YProperty">
+            <summary> Координата Y центра вершины </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelXProperty">
+            <summary> Модельная координата X центра вершины </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelYProperty">
+            <summary> Модельная координата Y центра вершины </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.InitBindings">
+            <summary> Устанавливает привязки </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.#ctor">
+            <summary> Конструктор по-умолчанию </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ToString">
+            <summary>
+            Returns a string that represents the current object.
+            </summary>
+            <returns>
+            A string that represents the current object.
+            </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.OnApplyTemplate">
+            <summary> When overridden in a derived class, is invoked whenever application code or internal processes 
+            (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>. 
+            In simplest terms, this means the method is called just before a UI element displays in an application. 
+            </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Rename(System.String)">
+            <summary> Переименовать </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.GraphLabs#Graphs#IVertex#Rename(System.String)">
+            <summary> Переименовать вершину </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.GetHashCode">
+            <summary> GetHashCode </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+            <remarks> Не в этой жизни </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Equals(GraphLabs.Graphs.IVertex)">
+            <summary> Сравнение вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Equals(System.Object)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Radius">
+            <summary> Радиус вершины </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Width">
+            <summary> Длина </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Height">
+            <summary> Ширина </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ScaleFactor">
+            <summary> Коэффициент масштабирования </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.X">
+            <summary> Координата X центра вершины </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.Y">
+            <summary> Координата Y центра вершины </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelX">
+            <summary> Модельная координата X центра вершины </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelY">
+            <summary> Модельная координата Y центра вершины </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.Vertex.RadiusToWidthHeightConverter">
+            <summary> Конвертер из радиуса в длину/ширину </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.RadiusToWidthHeightConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> Из радиуса в длину/ширину </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.RadiusToWidthHeightConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> Из длины/ширины в радиус </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.Vertex.CoordsConverter">
+            <summary> Из координат центра вершины в координаты её верхнего левого угла </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.CoordsConverter.#ctor(System.Func{System.Double})">
+            <summary> Ctor. </summary>
+            <param name="radiusAccessor"> Функция, возвращающая радиус вершины </param>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.CoordsConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> Из центра в угол </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.CoordsConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> Из угла в центр </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelCoordsConverter">
+            <summary> Из модельных координат в реальные </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelCoordsConverter.#ctor(System.Func{System.Double})">
+            <summary> Ctor. </summary>
+            <param name="scaleAccessor"> Функция, возвращающая радиус вершины </param>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelCoordsConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> Из модельных в реальные </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.Vertex.ModelCoordsConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <summary> Из реальных в модельные </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UIComponents.Visualization.VisualizerClickEventArgs`1.#ctor(`0)">
+            <summary> Ctor. </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UIComponents.Visualization.VisualizerClickEventArgs`1.Control">
+            <summary> Вершина </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.VertexClickEventArgs">
+            <summary> EventArgs для события клика по вершине </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UIComponents.Visualization.VisualizationAlgorithm">
+            <summary> Алгоритм визуализации </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.VisualizationAlgorithm.ChargesAndSprings">
+            <summary> Заряды и пружины </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.VisualizationAlgorithm.Circle">
+            <summary> По кругу  </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.UIComponents.Visualization.VisualizationAlgorithm.RandomPositions">
+            <summary> Случайные позиции </summary>
+        </member>
+    </members>
+</doc>

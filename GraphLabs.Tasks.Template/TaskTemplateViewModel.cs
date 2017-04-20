@@ -3,15 +3,24 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Data;
+using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
 using GraphLabs.Common;
+using GraphLabs.Common.UserActionsRegistrator;
 using GraphLabs.Common.Utils;
 using GraphLabs.CommonUI;
 using GraphLabs.CommonUI.Controls.ViewModels;
 using GraphLabs.Graphs;
 using GraphLabs.Utils;
 using GraphLabs.Graphs.DataTransferObjects.Converters;
+using GraphLabs.Graphs.UIComponents.Visualization;
+using GraphLabs.Utils.Services;
+using Edge = GraphLabs.Graphs.Edge;
+using Vertex = GraphLabs.Graphs.Vertex;
+
+
 
 namespace GraphLabs.Tasks.Template
 {
@@ -230,11 +239,11 @@ namespace GraphLabs.Tasks.Template
         private DirectedGraph MatrixGraph;
 
 
-         private void SubscribeToViewEvents()
+        /* private void SubscribeToViewEvents()
           {
               View.VertexClicked += (sender, args) => OnVertexClick(args.Control);
               View.Loaded += (sender, args) => StartVariantDownload();
-          }
+          }*/
 
           /// <summary> Начать загрузку варианта </summary>
           public void StartVariantDownload()
@@ -290,5 +299,7 @@ namespace GraphLabs.Tasks.Template
                 Matrix.Add(new MatrixRowViewModel<string>(row));
             }
         }
+
+
     }
 }

@@ -1,0 +1,642 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GraphLabs.Graphs</name>
+    </assembly>
+    <members>
+        <member name="T:GraphLabs.Graphs.Contracts.GraphContracts">
+            <summary> Класс контрактов для интерфейса IGaph </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IGraph">
+            <summary> Граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph.AddEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph.RemoveEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph.AddVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph.RemoveVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.EdgesCount">
+            <summary> Числов рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.Item(GraphLabs.Graphs.IVertex,GraphLabs.Graphs.IVertex)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.VerticesCount">
+            <summary> Числов вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph.Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphContracts.AddEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphContracts.RemoveEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphContracts.AddVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphContracts.RemoveVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.EdgesCount">
+            <summary> Числов рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.Item(GraphLabs.Graphs.IVertex,GraphLabs.Graphs.IVertex)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.VerticesCount">
+            <summary> Числов вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphContracts.Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.Converters.EdgeToDtoConverter">
+            <summary> Конвертер из ребра в соответствующую ДТО и обратно </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.EdgeToDtoConverter.Convert(GraphLabs.Graphs.IEdge)">
+            <summary> Из ребра в ДТО </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.EdgeToDtoConverter.ConvertBack(GraphLabs.Graphs.DataTransferObjects.EdgeDto,System.Collections.Generic.ICollection{GraphLabs.Graphs.IVertex})">
+            <summary> Из ДТО в ребра </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.Converters.GraphToDtoConverter">
+            <summary> Конвертер из графа в соответствующую ДТО и обратно </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.GraphToDtoConverter.Convert(GraphLabs.Graphs.IGraph)">
+            <summary> Из графа в ДТО </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.GraphToDtoConverter.ConvertBack(GraphLabs.Graphs.DataTransferObjects.GraphDto)">
+            <summary> Из ДТО в граф </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.Converters.GraphSerializer">
+            <summary> Вспомагательный класс для сериализации/десериализации графов </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.GraphSerializer.Serialize(GraphLabs.Graphs.IGraph)">
+            <summary> Сериализует граф </summary>
+            <param name="graph"> Граф </param>
+            <returns>Массив байтов</returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.GraphSerializer.Deserialize(System.Byte[])">
+            <summary> Десериализует граф </summary>
+            <param name="graph">Массив байтов</param>
+            <returns>
+            <see cref="T:GraphLabs.Graphs.DirectedGraph"/> или <see cref="T:GraphLabs.Graphs.UndirectedGraph"/>
+            </returns>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.Converters.VertexToDtoConverter">
+            <summary> Конвертер из вершины в соответствующую ДТО и обратно </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.VertexToDtoConverter.Convert(GraphLabs.Graphs.IVertex)">
+            <summary> Из вершины в ДТО </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DataTransferObjects.Converters.VertexToDtoConverter.ConvertBack(GraphLabs.Graphs.DataTransferObjects.VertexDto)">
+            <summary> Из ДТО в вершину </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.EdgeDto">
+            <summary> Класс для пересылки ребра </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.EdgeDto.Vertex1">
+            <summary> Индекс вершины 1 (вершины-истока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.EdgeDto.Vertex2">
+            <summary> Индекс вершины 2 (вершины-стока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.EdgeDto.Directed">
+            <summary> Ребро ориентированное? (является дугой?) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.EdgeDto.Weight">
+            <summary> Вес </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.GraphDto">
+            <summary> Класс для пересылки графа </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.GraphDto.Vertices">
+            <summary> Вершины </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.GraphDto.Edges">
+            <summary> Рёбра </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.GraphDto.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.GraphDto.IsWeighted">
+            <summary> Граф взвешенный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.GraphDto.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DataTransferObjects.VertexDto">
+            <summary> Класс для пересылки вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DataTransferObjects.VertexDto.Name">
+            <summary> Имя вершины </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DirectedEdge">
+            <summary> Ориентированное ребро </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.Edge">
+            <summary> Ребро / дуга графа </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IEdge`1">
+            <summary> Ребро или дуга графа </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IEdge">
+            <summary> Non-generic IEdge </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.ICloneable">
+            <summary> Поддержка создания глубокой копии </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.ICloneable.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IEdge.Vertex1">
+            <summary> Индекс вершины 1 (вершины-истока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IEdge.Vertex2">
+            <summary> Индекс вершины 2 (вершины-стока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IEdge.Directed">
+            <summary> Ребро ориентированное? (является дугой?) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IEdge`1.Vertex1">
+            <summary> Индекс вершины 1 (вершины-истока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IEdge`1.Vertex2">
+            <summary> Индекс вершины 2 (вершины-стока) </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.#ctor(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex)">
+            <summary> Создаёт новое ребро по указанным параметрам </summary>
+            <param name="vertex1">Вершина 1</param>
+            <param name="vertex2">Вершина 2</param>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.ToString">
+            <summary> Returns a string that represents the current object. </summary>
+            <returns> A string that represents the current object. </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.GetHashCode">
+            <summary> GetHashCode </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.Equals(GraphLabs.Graphs.IEdge)">
+            <summary> Сравнение рёбер </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.Equals(GraphLabs.Graphs.Edge)">
+            <summary> Сравнение рёбер </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Edge.Equals(System.Object)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Edge.Vertex1">
+            <summary> Индекс вершины 1 (вершины-истока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Edge.Vertex2">
+            <summary> Индекс вершины 2 (вершины-стока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Edge.GraphLabs#Graphs#IEdge#Vertex1">
+            <summary> Индекс вершины 1 (вершины-истока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Edge.GraphLabs#Graphs#IEdge#Vertex2">
+            <summary> Индекс вершины 2 (вершины-стока) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Edge.Directed">
+            <summary> Ребро ориентированное? (является дугой?) </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedEdge.Equals(GraphLabs.Graphs.DirectedEdge)">
+            <summary> Сравнение рёбер </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedEdge.ToString">
+            <summary> Returns a string that represents the current object. </summary>
+            <returns> A string that represents the current object. </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedEdge.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedEdge.#ctor(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex)">
+            <summary> Создаёт новое ребро по указанным параметрам </summary>
+            <param name="vertex1">Вершина 1</param>
+            <param name="vertex2">Вершина 2</param>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedEdge.Directed">
+            <summary> Ребро ориентированное? (является дугой?) </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DirectedGraph">
+            <summary> Ориентированный граф </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.Graph`2">
+            <summary> Абстрактный граф </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IGraph`2">
+            <summary> Граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph`2.AddEdge(`1)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph`2.RemoveEdge(`1)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph`2.AddVertex(`0)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IGraph`2.RemoveVertex(`0)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph`2.Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph`2.Item(`0,`0)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IGraph`2.Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IObservableGraph">
+            <summary> Граф </summary>
+        </member>
+        <member name="E:GraphLabs.Graphs.IObservableGraph.GraphChanged">
+            <summary> Происходит при добавлении/удалении рёбер или вершин </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.Graph`2.EdgesList">
+            <summary> Коллекция рёбрышек </summary>
+        </member>
+        <member name="F:GraphLabs.Graphs.Graph`2.VerticesList">
+            <summary> Коллекция вершинок </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.GraphLabs#Graphs#IGraph#AddEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.GraphLabs#Graphs#IGraph#RemoveEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.GraphLabs#Graphs#IGraph#AddVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.GraphLabs#Graphs#IGraph#RemoveVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.AddEdge(`1)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.RemoveEdge(`1)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.AddVertex(`0)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.RemoveVertex(`0)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.#ctor">
+            <summary> Создаёт новый совсем пустой граф. </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.OnGraphChanged(System.Object,GraphLabs.Graphs.GraphChangedEventArgs)">
+            <summary> Callback на изменение вершины </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Graph`2.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.EdgesCount">
+            <summary> Числов рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.GraphLabs#Graphs#IGraph#Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.GraphLabs#Graphs#IGraph#Item(GraphLabs.Graphs.IVertex,GraphLabs.Graphs.IVertex)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.VerticesCount">
+            <summary> Числов вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Graph`2.Item(`0,`0)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="E:GraphLabs.Graphs.Graph`2.GraphChanged">
+            <summary> Происходит при добавлении/удалении рёбер или вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedGraph.CreateEmpty(System.Int32)">
+            <summary> Создаёт пустой граф на заданном числе вершин </summary>
+            <remarks> Вершины в новом графе имеют имена 1, 2, 3, и т. д. </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedGraph.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedGraph.Item(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex)">
+            <summary> Возвращает ребро с началом в v1 и концом в v2 </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedGraph.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedGraph.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DirectedWeightedEdge">
+            <summary> Взвешенная дуга </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IWeightedEdge">
+            <summary> Взвешенное ребро </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IWeightedEdge.Weight">
+            <summary> Вес ребра </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedWeightedEdge.Equals(GraphLabs.Graphs.IWeightedEdge)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedWeightedEdge.Equals(GraphLabs.Graphs.DirectedWeightedEdge)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedWeightedEdge.ToString">
+            <summary> Returns a string that represents the current object. </summary>
+            <returns> A string that represents the current object. </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedWeightedEdge.#ctor(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex,System.Int32)">
+            <summary> Создаёт новое ребро по указанным параметрам</summary>
+            <param name="vertex1">Вершина 1</param>
+            <param name="vertex2">Вершина 2</param>
+            <param name="weight">Вес</param>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedWeightedEdge.Weight">
+            <summary> Вес </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.GraphChangedEventArgs">
+            <summary> EventArgs для события изменения графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.GraphChangedEventArgs.#ctor(System.Collections.Generic.IEnumerable{GraphLabs.Graphs.IVertex},System.Collections.Generic.IEnumerable{GraphLabs.Graphs.IVertex},System.Collections.Generic.IEnumerable{GraphLabs.Graphs.IEdge},System.Collections.Generic.IEnumerable{GraphLabs.Graphs.IEdge})">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="newVertices"> Добавленные вершины </param>
+            <param name="oldVertices"> Удалённые или замещённые вершины </param>
+            <param name="newEdges"> Добавленные рёбра </param>
+            <param name="oldEdges"> Удалённые или замещённые рёбра </param>
+        </member>
+        <member name="P:GraphLabs.Graphs.GraphChangedEventArgs.NewEdges">
+            <summary> Новые рёбра </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.GraphChangedEventArgs.OldEdges">
+            <summary> Удалённые или замещённые рёбра </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.GraphChangedEventArgs.NewVertices">
+            <summary> Новые вершины </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.GraphChangedEventArgs.OldVertices">
+            <summary> Удалённые или замещённые вершины </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2">
+            <summary> Класс контрактов для интерфейса IGaph </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.AddEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.RemoveEdge(GraphLabs.Graphs.IEdge)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.AddVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.RemoveVertex(GraphLabs.Graphs.IVertex)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.AddEdge(`1)">
+            <summary> Добавляет ребро newEdge к графу </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.RemoveEdge(`1)">
+            <summary> Удаляет ребро edge из графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.AddVertex(`0)">
+            <summary> Добавляет вершину vertex в граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.RemoveVertex(`0)">
+            <summary> Удалёет вершину vertex из графа </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.EdgesCount">
+            <summary> Числов рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.GraphLabs#Graphs#IGraph#Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.GraphLabs#Graphs#IGraph#Item(GraphLabs.Graphs.IVertex,GraphLabs.Graphs.IVertex)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.VerticesCount">
+            <summary> Числов вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.GraphLabs#Graphs#IGraph#Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.Edges">
+            <summary> Доступная только для чтения коллекция рёбер </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.Vertices">
+            <summary> Доступная только для чтения коллекция вершин </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Contracts.GraphOfVEContracts`2.Item(`0,`0)">
+            <summary> Возвращает ребро между вершинами v1 и v2 (если есть) или null (если ребра нет) </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.GraphOperations">
+            <summary> Статичный класс, реализующий операции над графами. </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.GraphOperations.CheckIsomorphism``2(GraphLabs.Graphs.IGraph{``0,``1},GraphLabs.Graphs.IGraph{``0,``1})">
+            <summary> Проверка двух графов на изоморфизм. </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.GraphOperations.Union``2(GraphLabs.Graphs.Graph{``0,``1}[])">
+            <summary> Объединение графов </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.GraphOperations.Intersection``2(GraphLabs.Graphs.Graph{``0,``1},GraphLabs.Graphs.Graph{``0,``1})">
+            <summary> Пересечение двух графов. </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.GraphOperations.FindStronglyConnectedComponents(GraphLabs.Graphs.IGraph)">
+            <summary> Находит компоненты сильной связности для заданного графа </summary>
+            <requires>graph != null</requires>
+            <requires>!graph.AllowMultipleEdges</requires>
+            <requires>graph.Directed</requires>
+        </member>
+        <member name="T:GraphLabs.Graphs.GraphOperations.SccBuilder">
+            <summary> Класс для нахождения компонент сильной связности </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.GraphOperations.SccBuilder.FindComponents(GraphLabs.Graphs.IGraph)">
+            <summary> Ищет компоненты связности для заданного графа </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.Helpers.DebugGraphGenerator">
+            <summary> Для использования в дебаге из веб-сервисов </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Helpers.DebugGraphGenerator.GetSerializedGraph">
+            <summary>asdsf </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Helpers.DebugGraphGenerator.GetSerializedWeightedGraph">
+            <summary>asdsf </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.Helpers.EdgeExtensions">
+            <summary> Методы расширения для IEdge </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Helpers.EdgeExtensions.IsIncidentTo``1(GraphLabs.Graphs.IEdge{``0},``0)">
+            <summary> Проверяет, является ли данное ребро инцидентным заданной вершине </summary>
+            <param name="edge"> Ребро </param>
+            <param name="vertex"> Вершина </param>
+        </member>
+        <member name="T:GraphLabs.Graphs.Contracts.CloneableContracts">
+            <summary> Класс контрактов для ICloneable </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Contracts.CloneableContracts.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.IVertex">
+            <summary> Вершина графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.IVertex.Rename(System.String)">
+            <summary> Переименовать вершину </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.IVertex.Name">
+            <summary> Название вершины </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UndirectedEdge">
+            <summary> Ребро графа </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UndirectedEdge.Equals(GraphLabs.Graphs.UndirectedEdge)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UndirectedEdge.ToString">
+            <summary> Returns a string that represents the current object. </summary>
+            <returns> A string that represents the current object. </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.UndirectedEdge.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UndirectedEdge.#ctor(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex)">
+            <summary> Создаёт новое ребро по указанным параметрам </summary>
+            <param name="vertex1">Вершина 1</param>
+            <param name="vertex2">Вершина 2</param>
+        </member>
+        <member name="P:GraphLabs.Graphs.UndirectedEdge.Directed">
+            <summary> Ребро ориентированное? (является дугой?) </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.UndirectedGraph">
+            <summary> Обыкновенный неориентированный граф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.UndirectedGraph.CreateEmpty(System.Int32)">
+            <summary> Создаёт пустой граф на заданном числе вершин </summary>
+            <remarks> Вершины в новом графе имеют имена 1, 2, 3, и т. д. </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.UndirectedGraph.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UndirectedGraph.Item(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex)">
+            <summary> Возвращает ребро между вершинамиv v1 и v2. Если ребра нет, то null. </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UndirectedGraph.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.UndirectedGraph.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.Vertex">
+            <summary> Вершина графа. </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.#ctor(System.String)">
+            <summary> Создаёт новую вершину с именем Name. </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.Rename(System.String)">
+            <summary> Переименовать </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.GraphLabs#Graphs#IVertex#Rename(System.String)">
+            <summary> Переименовать вершину </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.ToString">
+            <summary> Returns a string that represents the current object. </summary>
+            <returns> A string that represents the current object. </returns>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.GetHashCode">
+            <summary> GetHashCode </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.Equals(GraphLabs.Graphs.IVertex)">
+            <summary> Сравнение вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.Equals(GraphLabs.Graphs.Vertex)">
+            <summary> Сравнение вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.Vertex.Equals(System.Object)">
+            <summary> Сравниваем </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Vertex.Color">
+            <summary> Цвет </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.Vertex.Name">
+            <summary> Возвращает имя вершины. </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.DirectedWeightedGraph">
+            <summary> Взвешенный орграф </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedWeightedGraph.CreateEmpty(System.Int32)">
+            <summary> Создаёт пустой граф на заданном числе вершин </summary>
+            <remarks> Вершины в новом графе имеют имена 1, 2, 3, и т. д. </remarks>
+        </member>
+        <member name="M:GraphLabs.Graphs.DirectedWeightedGraph.Clone">
+            <summary> Создаёт глубокую копию данного объекта </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedWeightedGraph.Item(GraphLabs.Graphs.Vertex,GraphLabs.Graphs.Vertex)">
+            <summary> Возвращает ребро с началом в v1 и концом в v2 </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedWeightedGraph.Directed">
+            <summary> Граф ориентированный? </summary>
+        </member>
+        <member name="P:GraphLabs.Graphs.DirectedWeightedGraph.AllowMultipleEdges">
+            <summary> Допускать два и более ребра между двумя вершинами? </summary>
+        </member>
+        <member name="T:GraphLabs.Graphs.ValueEqualityComparer">
+            <summary> Сравниватель вершин </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.ValueEqualityComparer.VerticesEquals(GraphLabs.Graphs.IVertex,GraphLabs.Graphs.IVertex)">
+            <summary> Сравнение по значению! </summary>
+        </member>
+        <member name="M:GraphLabs.Graphs.ValueEqualityComparer.EdgesEquals(GraphLabs.Graphs.IEdge,GraphLabs.Graphs.IEdge)">
+            <summary> Сравнение по значению! </summary>
+        </member>
+    </members>
+</doc>
