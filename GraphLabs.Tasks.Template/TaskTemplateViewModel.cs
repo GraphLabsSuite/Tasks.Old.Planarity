@@ -230,11 +230,11 @@ namespace GraphLabs.Tasks.Template
         private DirectedGraph MatrixGraph;
 
 
-         private void SubscribeToViewEvents()
+         /*private void SubscribeToViewEvents()
           {
               View.VertexClicked += (sender, args) => OnVertexClick(args.Control);
               View.Loaded += (sender, args) => StartVariantDownload();
-          }
+          }*/
 
           /// <summary> Начать загрузку варианта </summary>
           public void StartVariantDownload()
