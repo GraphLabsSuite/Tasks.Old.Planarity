@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -6,9 +7,9 @@ using System.Windows.Input;
 using GraphLabs.CommonUI;
 using GraphLabs.CommonUI.Helpers;
 using GraphLabs.Graphs;
-using System;
 using GraphLabs.Graphs.UIComponents.Visualization;
 using Vertex = GraphLabs.Graphs.UIComponents.Visualization.Vertex;
+
 
 namespace GraphLabs.Tasks.Template
 {
@@ -18,15 +19,12 @@ namespace GraphLabs.Tasks.Template
         private const double START_NEW_VERTEX_R = 30.0;
         #region Команды
 
-
-        /*/// <summary> Клик по вершине </summary>
-        public event EventHandler<VertexClickEventArgs> VertexClicked;*/
         /// <summary> Клик по вершине </summary>
         public static readonly DependencyProperty VertexClickCommandProperty = DependencyProperty.Register(
-            "VertexClickCommand",
-            typeof(ICommand),
-            typeof(TaskTemplate),
-            new PropertyMetadata(default(ICommand)));
+             "VertexClickCommand",
+             typeof(ICommand),
+             typeof(TaskTemplate),
+             new PropertyMetadata(default(ICommand)));
 
         /// <summary> Клик по вершине </summary>
         public ICommand VertexClickCommand
@@ -62,7 +60,6 @@ namespace GraphLabs.Tasks.Template
 
         #endregion
 
-
         /// <summary> Вершины из визуализатора </summary>
         public static DependencyProperty VertVisProperty =
             DependencyProperty.Register("VertVis", typeof(ReadOnlyCollection<Vertex>), typeof(TaskTemplate), new PropertyMetadata(default(ReadOnlyCollection<Vertex>)));
@@ -86,8 +83,6 @@ namespace GraphLabs.Tasks.Template
             SetBinding(VertVisProperty, new Binding("VertVisCol") { Mode = BindingMode.TwoWay });
         }
 
-
-
         private void OnVertexClick(object sender, VertexClickEventArgs e)
         {
             if (VertexClickCommand != null)
@@ -105,6 +100,7 @@ namespace GraphLabs.Tasks.Template
             }
             VertVis = Visualizer.Vertices;
         }
+
         private void OnVislualizerClick(object sender, MouseButtonEventArgs e)
         {
             if (VisualizerClickCommand != null)
@@ -137,6 +133,5 @@ namespace GraphLabs.Tasks.Template
             }
             VertVis = Visualizer.Vertices;
         }
-
     }
 }

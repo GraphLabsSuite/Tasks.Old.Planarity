@@ -3,24 +3,20 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Windows.Data;
-using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Data;
+using System.Windows.Media;
 using GraphLabs.Common;
-using GraphLabs.Common.UserActionsRegistrator;
 using GraphLabs.Common.Utils;
 using GraphLabs.CommonUI;
 using GraphLabs.CommonUI.Controls.ViewModels;
+using GraphLabs.Common.UserActionsRegistrator;
 using GraphLabs.Graphs;
 using GraphLabs.Utils;
 using GraphLabs.Graphs.DataTransferObjects.Converters;
-using GraphLabs.Graphs.UIComponents.Visualization;
-using GraphLabs.Utils.Services;
 using Edge = GraphLabs.Graphs.Edge;
 using Vertex = GraphLabs.Graphs.Vertex;
-
-
 
 namespace GraphLabs.Tasks.Template
 {
@@ -36,14 +32,18 @@ namespace GraphLabs.Tasks.Template
             MoveVertex,
             RemoveVertex,
             AddVertex,
+            /// <summary> Добавление связи (этап 1) </summary>
+            AddEdge1,
+            /// <summary> Добавление связи (этап 2) </summary>
+            AddEdge2,
         }
 
         /// <summary> Текущее состояние </summary>
         private State _state;
 
         /// <summary> Допустимые версии генератора, с помощью которого сгенерирован вариант </summary>
-        private readonly Version[] _allowedGeneratorVersions = {  new Version(1, 0) };
-        
+        private readonly Version[] _allowedGeneratorVersions = { new Version(1, 0) };
+
         /// <summary> Допустимые версии генератора </summary>
         protected override Version[] AllowedGeneratorVersions
         {
@@ -55,9 +55,9 @@ namespace GraphLabs.Tasks.Template
 
         /// <summary> Идёт загрузка данных? </summary>
         public static readonly DependencyProperty IsLoadingDataProperty = DependencyProperty.Register(
-            ExpressionUtility.NameForMember((TaskTemplateViewModel m) => m.IsLoadingData), 
-            typeof(bool), 
-            typeof(TaskTemplateViewModel), 
+            ExpressionUtility.NameForMember((TaskTemplateViewModel m) => m.IsLoadingData),
+            typeof(bool),
+            typeof(TaskTemplateViewModel),
             new PropertyMetadata(false));
 
         /// <summary> Разрешено перемещение вершин? </summary>
@@ -132,9 +132,11 @@ namespace GraphLabs.Tasks.Template
         public static readonly DependencyProperty VertexClickCmdProperty =
             DependencyProperty.Register("VertexClickCmd", typeof(ICommand), typeof(TaskTemplateViewModel), new PropertyMetadata(default(ICommand)));
 
+        /// <summary> Загрузка silvelight-модуля выполнена </summary>
         public static readonly DependencyProperty OnLoadedCmdProperty =
             DependencyProperty.Register("OnLoadedCmd", typeof(ICommand), typeof(TaskTemplateViewModel), new PropertyMetadata(default(ICommand)));
 
+        /// <summary> Загрузка silvelight-модуля выполнена </summary>
         public ICommand OnLoadedCmd
         {
             get { return (ICommand)GetValue(OnLoadedCmdProperty); }
@@ -154,6 +156,7 @@ namespace GraphLabs.Tasks.Template
            typeof(TaskTemplateViewModel),
            new PropertyMetadata(default(DelegateCommand)));
 
+        /// <summary> Клик по визуализатору </summary>
         public DelegateCommand VisualizerClickCmd
         {
             get { return (DelegateCommand)GetValue(VisualizerClickCmdProperty); }
@@ -180,7 +183,7 @@ namespace GraphLabs.Tasks.Template
         protected override void OnInitialized()
         {
             base.OnInitialized();
-            
+
             InitToolBarCommands();
 
             OnLoadedCmd = new DelegateCommand(
@@ -193,7 +196,31 @@ namespace GraphLabs.Tasks.Template
             VertexClickCmd = new DelegateCommand(
                 o =>
                 {
-                    
+                    if (_state == State.AddEdge1)
+                    {
+                        outV = GivenGraph.Vertices.Single(v => v.Name == ((IVertex)o).Name) as Vertex;
+                        VertVisCol.Single(v => v.Name == outV.Name).Radius = 23;
+                        VertVisCol.Single(v => v.Name == outV.Name).Background = new SolidColorBrush(Colors.Magenta);
+                        UserActionsManager.RegisterInfo(string.Format("Выходная вершина - [{0}]. Выберите входную вершину.", ((IVertex)o).Name));
+                        _state = State.AddEdge2;
+                        return;
+                    }
+                    if (_state == State.AddEdge2)
+                    {
+                        var inV = GivenGraph.Vertices.Single(v => v.Name == ((IVertex)o).Name) as Vertex;
+                        UserActionsManager.RegisterInfo(string.Format("Входная вершина - [{0}]. Добавьте другое ребро или выйдете из режима добавления ребер", ((IVertex)o).Name));
+                        var newEdge = new DirectedEdge(outV, inV);
+                        if (GivenGraph.Edges.Any(newEdge.Equals))
+                        {
+                            ReportMistake("Указанная дуга уже существует.");
+                            return;
+                        }
+                        VertVisCol.Single(v => v.Name == outV.Name).Radius = 20;
+                        VertVisCol.Single(v => v.Name == outV.Name).Background = new SolidColorBrush(Colors.LightGray);
+
+                        GivenGraph.AddEdge(newEdge);
+                        _state = State.AddEdge1;
+                    }
                     if (_state == State.RemoveVertex)
                     {
                         GivenGraph.RemoveVertex(GivenGraph.Vertices.Single(v => v.Name == ((IVertex)o).Name));
@@ -222,6 +249,39 @@ namespace GraphLabs.Tasks.Template
         }
         //конец добавлени-удаления
 
+        /// <summary> Задание загружено </summary>
+        /// <param name="e"></param>
+        protected override void OnTaskLoadingComlete(VariantDownloadedEventArgs e)
+        {
+
+            // Мы вызваны из другого потока. Поэтому работаем с UI-элементами через Dispatcher.
+            Dispatcher.BeginInvoke(() => { GivenGraph = VariantSerializer.Deserialize(e.Data)[0]; });
+
+            //var number = e.Number; -- м.б. тоже где-то показать надо
+            //var version = e.Version;
+
+
+            GivenGraph = DirectedGraph.CreateEmpty(0);
+            MatrixGraph = (DirectedGraph)VariantSerializer.Deserialize(e.Data)[0];
+
+            Matrix = new ObservableCollection<MatrixRowViewModel<string>>();
+            for (var i = 0; i < MatrixGraph.VerticesCount; ++i)
+            {
+                var row = new ObservableCollection<string> { i.ToString() };
+                for (var j = 0; j < MatrixGraph.VerticesCount; ++j)
+                {
+                    var testEdge = new DirectedEdge(MatrixGraph.Vertices[i], MatrixGraph.Vertices[j]);
+                    row.Add(MatrixGraph.Edges.Any(testEdge.Equals)
+                        //row.Add((MatrixGraph[MatrixGraph.Vertices[i],MatrixGraph.Vertices[j]] != null)
+                        ? "1"
+                        : "0");
+                }
+                row.CollectionChanged += RowChanged;
+                Matrix.Add(new MatrixRowViewModel<string>(row));
+            }
+        }
+
+
 
         private void RecalculateIsLoadingData()
         {
@@ -238,15 +298,73 @@ namespace GraphLabs.Tasks.Template
 
         private DirectedGraph MatrixGraph;
 
+        private void ReportMistake(string message)
+        {
+            MessageBox.Show("Вы допустили ошибку!\n" + message);
+        }
 
-        /* private void SubscribeToViewEvents()
-          {
-              View.VertexClicked += (sender, args) => OnVertexClick(args.Control);
-              View.Loaded += (sender, args) => StartVariantDownload();
-          }*/
 
-          /// <summary> Начать загрузку варианта </summary>
-          public void StartVariantDownload()
+        private void CheckGraph()
+        {
+            if (MatrixGraph.VerticesCount != GivenGraph.VerticesCount)
+            {
+                MessageBox.Show("Проверка графа завершена!\n" + "Неправильное количество вершин");
+                UserActionsManager.RegisterMistake("Ошибка!", 10);
+                return;
+            }
+            for (int i = 0; i < MatrixGraph.EdgesCount; ++i)
+            {
+                if (!GivenGraph.Edges.Any(MatrixGraph.Edges[i].Equals))
+                {
+                    MessageBox.Show("Проверка графа завершена!\n" + "Не хватает дуги: " + MatrixGraph.Edges[i].Vertex1.Name + "->" + MatrixGraph.Edges[i].Vertex2.Name);
+                    UserActionsManager.RegisterMistake("Ошибка!", 5);
+                    return;
+                }
+            }
+            for (int i = 0; i < GivenGraph.EdgesCount; ++i)
+            {
+                if (!MatrixGraph.Edges.Any(GivenGraph.Edges[i].Equals))
+                {
+                    MessageBox.Show("Проверка графа завершена!\n" + "Лишняя дуга: " + GivenGraph.Edges[i].Vertex1.Name + "->" + GivenGraph.Edges[i].Vertex2.Name);
+                    UserActionsManager.RegisterMistake("Ошибка!", 5);
+                    return;
+                }
+            }
+            MessageBox.Show("Проверка графа завершена!\n" + "Вы молодец!");
+            _state = State.Nothing;
+        }
+
+        public void CheckPlan()
+        {
+            for (int i = 0; i < GivenGraph.EdgesCount; ++i)
+            {
+                for (int j = 0; j < GivenGraph.EdgesCount; ++j)
+                {
+
+                    var V1 = VertVisCol.Single(v => v.Name == GivenGraph.Edges[i].Vertex1.Name);
+                    var V2 = VertVisCol.Single(v => v.Name == GivenGraph.Edges[i].Vertex2.Name);
+                    var V3 = VertVisCol.Single(v => v.Name == GivenGraph.Edges[j].Vertex1.Name);
+                    var V4 = VertVisCol.Single(v => v.Name == GivenGraph.Edges[j].Vertex2.Name);
+
+                    if (HaveCollision(V1, V2, V3, V4))
+                    {
+                        MessageBox.Show("Проверка графа завершена!\n" + "Граф не плоский");
+                        UserActionsManager.RegisterMistake("Ошибка!", 10);
+                        return;
+                    }
+                }
+            }
+            MessageBox.Show("Проверка графа завершена!\n" + "Граф плоский! Поздравляем!");
+        }
+        /*private void SubscribeToViewEvents()
+         {
+             View.VertexClicked += (sender, args) => OnVertexClick(args.Control);
+             View.Loaded += (sender, args) => StartVariantDownload();
+         }
+
+
+        /// <summary> Начать загрузку варианта </summary>
+        public void StartVariantDownload()
           {
               VariantProvider.DownloadVariantAsync();
           }
@@ -264,40 +382,24 @@ namespace GraphLabs.Tasks.Template
                 // Нас могли дёрнуть из другого потока, поэтому доступ к UI - через Dispatcher.
                 Dispatcher.BeginInvoke(RecalculateIsLoadingData);
             }
-        }
+        }*/
 
-
-
-        /// <summary> Задание загружено </summary>
-        /// <param name="e"></param>
-        protected override void OnTaskLoadingComlete(VariantDownloadedEventArgs e)
+        private bool HaveCollision(Graphs.UIComponents.Visualization.Vertex a, Graphs.UIComponents.Visualization.Vertex b, Graphs.UIComponents.Visualization.Vertex c, Graphs.UIComponents.Visualization.Vertex d)
         {
-            /* Изначально было
-            // Мы вызваны из другого потока. Поэтому работаем с UI-элементами через Dispatcher.
-            Dispatcher.BeginInvoke(() => { GivenGraph = VariantSerializer.Deserialize(e.Data)[0]; });
+            double A1 = b.Y - a.Y;
+            double B1 = a.X - b.X;
+            double C1 = -A1 * a.X - B1 * a.Y;
 
-            //var number = e.Number; -- м.б. тоже где-то показать надо
-            //var version = e.Version;
-            */
+            double A2 = d.Y - c.Y;
+            double B2 = c.X - d.X;
+            double C2 = -A2 * c.X - B2 * c.Y;
 
-            GivenGraph = DirectedGraph.CreateEmpty(0);
-            MatrixGraph = (DirectedGraph)GraphSerializer.Deserialize(e.Data);
+            double f1 = A1 * c.X + B1 * c.Y + C1;
+            double f2 = A1 * d.X + B1 * d.Y + C1;
+            double f3 = A2 * a.X + B2 * a.Y + C2;
+            double f4 = A2 * b.X + B2 * b.Y + C2;
 
-            Matrix = new ObservableCollection<MatrixRowViewModel<string>>();
-            for (var i = 0; i < MatrixGraph.VerticesCount; ++i)
-            {
-                var row = new ObservableCollection<string> { i.ToString() };
-                for (var j = 0; j < MatrixGraph.VerticesCount; ++j)
-                {
-                    var testEdge = new DirectedEdge(MatrixGraph.Vertices[i], MatrixGraph.Vertices[j]);
-                    row.Add(MatrixGraph.Edges.Any(testEdge.Equals)
-                        //row.Add((MatrixGraph[MatrixGraph.Vertices[i],MatrixGraph.Vertices[j]] != null)
-                        ? "1"
-                        : "0");
-                }
-                row.CollectionChanged += RowChanged;
-                Matrix.Add(new MatrixRowViewModel<string>(row));
-            }
+            return f1 * f2 < 0 && f3 * f4 < 0;
         }
 
 

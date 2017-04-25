@@ -16,13 +16,13 @@
              MinWidth="800" 
              MinHeight="400"
              Loaded="OnLoaded">
-    <!--xmlns:template="clr-namespace:GraphLabs.Tasks.Template"-->
+
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:BooleanToNegativeConverter x:Key="NegateConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    
+
     <toolkit:BusyIndicator x:Name="BusyIndicator" 
                            IsBusy="{Binding IsLoadingData}" 
                            BusyContent="Пожалуйста, подождите...">
@@ -43,13 +43,13 @@
                 <RowDefinition Height="60" />
                 <RowDefinition Height="5" />
             </Grid.RowDefinitions>
-            
+
             <Border BorderThickness="5" 
                     Name="LeftMainBorder" 
                     Grid.Column="0" 
                     Grid.Row="0" 
                     Grid.ColumnSpan="4" 
-                    Grid.RowSpan="4">
+                    Grid.RowSpan="6">
                 <Border.BorderBrush>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FFA3AEB9" Offset="0" />
@@ -76,6 +76,7 @@
                               Orientation="Horizontal"
                               Background="SlateGray"
                               Commands="{Binding ToolBarCommands}" />
+
             <!-- Исходный граф -->
             <visualization1:GraphVisualizer x:Name="Visualizer" 
                                        Grid.Column="2" 
@@ -97,9 +98,8 @@
 
             <controls1:InformationBar ScoreColumnWidth="60" Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="4"
                                       DataContext="{Binding UserActionsManager}">
-                
+
             </controls1:InformationBar>
-            <!-- <template:TaskTemplate Grid.ColumnSpan="4" HorizontalAlignment="Left" Grid.RowSpan="4" VerticalAlignment="Top"/>-->
         </Grid>
     </toolkit:BusyIndicator>
 </commonUi:TaskViewBase>

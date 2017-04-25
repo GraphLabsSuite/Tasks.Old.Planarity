@@ -74,23 +74,63 @@ namespace GraphLabs.Tasks.Template
             testBut.Image = new BitmapImage(GetImageUri("NewVertex.png"));
             testBut.Description = "Добавить вершину";
 
-            // Завершение работы
-            var finishTask = new ToolBarInstantCommand(
+            //Добавление ребрышка
+            var addEdgeCommand = new ToolBarToggleCommand(
                 () =>
                 {
-                    UserActionsManager.ReportThatTaskFinished();
+                    _state = State.AddEdge1;
+                    UserActionsManager.RegisterInfo("Добавление ребра: Выберите выходную вершину.");
+
                 },
-                () => _state == State.Nothing
+                () =>
+                {
+                    UserActionsManager.RegisterInfo("Добавление ребра завершено.");
+                    _state = State.Nothing;
+                },
+                () => _state == State.Nothing,
+                () => true
                 )
             {
-                Image = new BitmapImage(GetImageUri("Complete.png")),
-                Description = "Завершить задание"
+                Image = new BitmapImage(GetImageUri("NewEdge.png")),
+                Description = "Добавление дуги"
             };
+
+            /*  // Завершение работы
+              var finishTask = new ToolBarInstantCommand(
+                  () =>
+                  {
+                      UserActionsManager.ReportThatTaskFinished();
+                  },
+                  () => _state == State.Nothing
+                  )
+              {
+                  Image = new BitmapImage(GetImageUri("Complete.png")),
+                  Description = "Завершить задание"
+              };*/
+
+
+            var checkGraphBut = new ToolBarInstantCommand(
+                 CheckGraph,
+                 () => _state == State.Nothing
+                 )
+            {
+                Image = new BitmapImage(GetImageUri("CondReady.png")),
+                Description = "Проверить правильность построения графа"
+            };
+
+            var checkAllBut = new ToolBarInstantCommand(
+              CheckPlan,
+              () => _state == State.Nothing
+              )
+            { Image = new BitmapImage(GetImageUri("CondReady.png")), Description = "Проверить, плоский ли граф" };
 
             ToolBarCommands.Add(moveCommand);
             ToolBarCommands.Add(removeVertex);
-            ToolBarCommands.Add(finishTask);
+            // ToolBarCommands.Add(finishTask);
             ToolBarCommands.Add(testBut);
+            ToolBarCommands.Add(addEdgeCommand);
+            ToolBarCommands.Add(checkGraphBut);
+            ToolBarCommands.Add(checkAllBut);
         }
     }
 }
