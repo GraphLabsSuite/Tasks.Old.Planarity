@@ -303,6 +303,14 @@ namespace GraphLabs.Tasks.Template
             MessageBox.Show("Вы допустили ошибку!\n" + message);
         }
 
+<<<<<<< HEAD
+=======
+         /*private void SubscribeToViewEvents()
+          {
+              View.VertexClicked += (sender, args) => OnVertexClick(args.Control);
+              View.Loaded += (sender, args) => StartVariantDownload();
+          }*/
+>>>>>>> bb4efd84f29ddc429fe7fbafb82f0ba35b836b39
 
         private void CheckGraph()
         {
