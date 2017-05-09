@@ -255,7 +255,7 @@ namespace GraphLabs.Tasks.Template
         {
 
             // Мы вызваны из другого потока. Поэтому работаем с UI-элементами через Dispatcher.
-            Dispatcher.BeginInvoke(() => { GivenGraph = VariantSerializer.Deserialize(e.Data)[0]; });
+            //Dispatcher.BeginInvoke(() => { GivenGraph = VariantSerializer.Deserialize(e.Data)[0]; });
 
             //var number = e.Number; -- м.б. тоже где-то показать надо
             //var version = e.Version;
